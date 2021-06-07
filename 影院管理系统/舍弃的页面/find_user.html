@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>用户查询</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: '楷体', Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-image: url(https://hbimg.huabanimg.com/c13aefc6a93b5b7233c60fa12d9f542e0f27b9a9128f2-UI44Gq_fw658/format/webp);
+            color: white;
+            background-size: cover;
+            min-width: 1020px;
+            font-weight: bold;
+        }
+
+        .search_user {
+            width: 40%;
+            margin-left: 25%;
+            height: 50px;
+            border-radius: 15px;
+            border: 2px solid white;
+            margin-top: 100px;
+            font-size: 18px;
+        }
+
+        button {
+            width: 8%;
+            margin-left: 2%;
+            height: 52px;
+            border-radius: 15px;
+            border: 2px solid #ff57220d;
+            background-color: #ff5722a1;
+            color: white;
+            font-size: 23px;
+            margin-top: 100px;
+        }
+
+        .content {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 60px;
+            height: 250px;
+            border-radius: 20px;
+            border: 2px solid black;
+            box-shadow: 7px 7px 10px black;
+            font-size: 26px;
+        }
+
+        .password,
+        .email,
+        .gender {
+            right: -40px;
+            position: relative;
+        }
+
+        .username {
+            right: -15px;
+            position: relative;
+        }
+
+        .row {
+            width: 70%;
+            margin: 18px auto 0;
+            padding-left: 20%;
+        }
+
+        .row div {
+            height: 30px;
+            width: 230px;
+            border-radius: 5px;
+            border: 1px solid white;
+            display: inline-block;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <input placeholder="请输入你要查询的用户的姓名" class="search_user" name="search_user" id="search_user">
+    <button class="search">查询</button>
+    <div class="content">
+        <div class="row">
+            用户名：
+            <div placeholder="用户名" class="username"></div>
+        </div>
+        <div class="row">
+            性别：
+            <div placeholder="性别" class="gender"></div>
+        </div>
+        <div class="row">
+            密码：
+            <div class="password" placeholder="密码"></div>
+        </div>
+        <div class="row">
+            邮箱：
+            <div placeholder="邮箱" class="email"></div>
+        </div>
+    </div>
+    <script>
+        $(".search").click(function () {
+            var search_user = $('.search_user').val();
+            if (search_user === '') {
+				alert('请输入要查询的用户名！');
+				return;
+			}
+            var username = $("input[name='search_user']").val();
+            $.ajax({
+                type: "post",
+                url: 'userSearch',
+                data: { "username": username },
+                dataType: "JSON",
+                success: function (return_data) {
+                    if (return_data.flag === true) {
+                        $('.username').html(return_data.data.username);
+                        $('.gender').html(return_data.data.gender);
+                        $('.password').html(return_data.data.password);
+                        $('.email').html(return_data.data.email);
+                    }
+                    else {
+                        alert("用户信息不存在！");
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

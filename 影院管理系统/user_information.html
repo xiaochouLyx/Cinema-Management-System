@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .list {
+            width: 15%;
+            background-color: black;
+            color: gray;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .list ul {
+            text-decoration: none;
+        }
+
+        .list ul a {
+            color: #9E9E9E;
+        }
+
+        .list ul li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        .list ul a:first-child li {
+            margin-top: 200px;
+        }
+
+        .list ul li:hover {
+            color: white;
+            background-color: #8080807d;
+        }
+
+        .user_manage {
+            background-color: #8080807d;
+            color: white;
+        }
+
+        .content {
+            width: 85%;
+            margin-left: 15%;
+        }
+
+        .content .topic {
+            width: 95%;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            padding-right: 5%;
+            background-color: #8080801a;
+        }
+
+        .content .search {
+            width: 95%;
+            height: 50px;
+            line-height: 50px;
+            margin: 20px auto;
+            padding-left: 5%;
+            font-weight: bold;
+        }
+
+        .content .search input {
+            width: 20%;
+            height: 35px;
+            border-radius: 8px;
+            border: 2px solid #80808033;
+            padding-left: 10px;
+        }
+
+        .content .search button {
+            border: 1px solid #000000b5;
+            border-radius: 5px;
+            width: 5%;
+            height: 35px;
+            line-height: 35px;
+            margin-left: 1%;
+            background-color: #000000b5;
+            color: white;
+        }
+
+        .content .search button:last-child {
+            border: 1px solid #008000b5;
+            background-color: #008000b5;
+        }
+
+        .content .values table {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .content .values table tr {
+            height: 45px;
+            text-align: center;
+        }
+
+        .content .values table th {
+            background-color: #80808038;
+        }
+
+        .content .values table td {
+            border-top: 1px solid #8080804d;
+        }
+
+        .content .values table td button {
+            border: 1px solid #2196f3;
+            border-radius: 5px;
+            width: 26%;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 1%;
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .content .values table td button:last-child {
+            background-color: #e01e10;
+            border: 1px solid #e01e10;
+        }
+
+        .add_content,.change_content {
+            display: none;
+            min-width: 408px;
+            width: 40%;
+            height: 380px;
+            position: fixed;
+            top: 150px;
+            left: 37%;
+            background-color: white;
+            z-index: 2;
+            border: 1px solid black;
+            box-shadow: 7px 7px 10px black;
+            border-radius: 15px;
+        }
+
+        .add_content h2,.change_content h2 {
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+        }
+
+        .add_content div,.change_content div{
+            width: 67%;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 33%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .add_content div:nth-child(2),.change_content div:nth-child(2){
+            margin-top: 120px;
+        }
+
+        .add_content div input,.change_content div input{
+            width: 20%;
+            height: 30px;
+            border-radius: 7px;
+            border: 1px solid black;
+            position: absolute;
+            right: 20%;
+        }
+        .add_content div .gender {
+            width: 22%;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 0px;
+            margin-left: 0px;
+            position: absolute;
+            right: 20%;
+            top: 175px;
+            display: inline-block;
+        }
+        .add_content div .gender input {
+            width: 30%;
+            height: 20px;
+            position: relative;
+            right: -4%;
+        }
+
+        .add_content button,.change_content button{
+            border: 1px solid #008000b5;
+            background-color: #008000b5;
+            border-radius: 5px;
+            width: 20%;
+            margin: 25px 40%;
+            height: 35px;
+            line-height: 35px;
+            color: white;
+        }
+
+        .appear {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list">
+        <img src="">
+        <ul>
+            <a href='./'>
+                <li>影厅管理</li>
+            </a>
+            <a href='./'>
+                <li>计划管理</li>
+            </a>
+            <a href='./'>
+                <li>座位管理</li>
+            </a>
+            <a href='./'>
+                <li>剧目管理</li>
+            </a>
+            <a href='./'>
+                <li>影票管理</li>
+            </a>
+            <a href='./'>
+                <li class="user_manage">用户管理</li>
+            </a>
+            <a href='./'>
+                <li>销售数据</li>
+            </a>
+            <a href='./'>
+                <li>购票退票</li>
+            </a>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="topic">
+            <a href='./login.html'>登录</a> /
+            <a href='./register.html'>注册</a>
+        </div>
+        <div class="search">
+            用户名称：
+            <input type="text" placeholder='search' name="search_user" class="search_user">
+            <button class="search_button">查询</button>
+            <button class="add_button">添加</button>
+        </div>
+        <div class="values">
+            <table id="table_list">
+                <tr>
+                    <th>用户名</th>
+                    <th>性别</th>
+                    <th>密码</th>
+                    <th>邮箱</th>
+                    <th>操作</th>
+                </tr>
+                <tr class="user">
+                    <td>测试</td>
+                    <td>男</td>
+                    <td>123456</td>
+                    <td>2108674352@qq.com</td>
+                    <td>
+                        <button class="change">修改</button>
+                        <button class="delete">删除</button>
+                    </td>
+                </tr>
+                <tr class="user">
+                    <td>测试</td>
+                    <td>男</td>
+                    <td>123456</td>
+                    <td>2108674352@qq.com</td>
+                    <td>
+                        <button class="change">修改</button>
+                        <button class="delete">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="add_content">
+        <h2>添加信息</h2>
+        <div>
+            用户名：<input type="text" id="add_username" name="add_username">
+        </div>
+        <div class="gender_change">
+            性别：
+            <div class="gender">
+                <input type="radio" name="gender" value="0">男
+                <input type="radio" name="gender" value="1">女
+            </div>
+        </div>
+        <div>
+            密码：<input type="text" id="add_password" name="add_password">
+        </div>
+        <div>
+            邮箱：<input type="text" id="add_email" name="add_email">
+        </div>
+        <button class="add_submit">添加</button>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'post',
+                url: 'userSearchAll',
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#table_list tr:not(:first)').empty('');
+                    for (i in data.data) {
+                        var tr;
+                        tr = '<td>' + data.data[i].username + '</td>' + '<td>' + data.data[i].gender + '</td>' + '<td>' + data.data[i].password + '</td>' + '<td>' + data.data[i].email + '</td>' + "<td><button class='change'>修改</button><button class='delete'>删除</button></td>";
+                        $('#table_list').append('<tr class="user">' + tr + '</tr>');
+
+                    }
+                }
+            });
+        });
+
+        /*添加信息*/
+        $(".add_button").click(function () {
+            $('.add_content').addClass('appear');
+            $('.add_submit').click(function () {
+                var username = $("#add_username").val();
+                var gender = $("input[name='gender']:checked").val();
+                var password = $('#add_password').val();
+                var email = $('#add_email').val();
+                if (username === '') {
+                    alert('请输入要增加的用户名！');
+                    return;
+                }   
+                if (gender == null) {
+                    alert('请选择性别！');
+                    return;
+                }
+                if (password === '') {
+                    alert('请输入要增加的用户密码！');
+                    return;
+                }
+                if (email === '') {
+                    alert('请输入要增加的用户邮箱！');
+                    return;
+                }
+                $.ajax({
+                    type: "post",
+                    url: 'register',
+                    data: { "username": username, "gender": gender, "password": password, "email": email},
+                    dataType: "JSON",
+                    success: function (return_data) {
+                        if (return_data.flag === true) {
+                            var tr;
+                            tr ='<td>'+ username + '</td>' + '<td>' + gender + '</td>' + '<td>' + password + '</td>' + '<td>' + email + '</td>' +"<td><button class='change'>修改</button><button class='delete'>删除</button></td>";
+                            $('#table_list').append('<tr class="user">' + tr + '</tr>');
+                            $('.add_content').removeClass('appear');
+                        }
+                        else {
+                            alert("添加失败，演出计划已经存在！");
+                        }
+                    }
+                })
+            })
+
+        });
+
+        /*修改信息*/
+        $('body').on('click', '.change', function () {
+            var tr = $(this).parent().parent();
+            var username = $(tr).children().eq(0).html();
+            var password = $(tr).children().eq(2).html();
+            var email = $(tr).children().eq(3).html();
+            var gender = $(tr).children().eq(1).html();
+            $.ajax({
+                type: "post",
+                url: 'userUpdate',
+                data: { "username": username, "password": password, "gender": gender, "email": email },
+                dataType: "JSON",
+                success: function (data) {
+                    if (data.flag === true) {
+                        alert("请求数据成功了，可以修改数据了！");
+                        // window.location.href='';
+                    }
+                    else {
+                        alert("修改失败，用户不存在！");
+                    }
+                }
+            })
+        });
+
+
+        /*删除信息*/
+        $('body').on('click', '.delete', function () {
+            var tr = $(this).parent().parent();
+            var username = $(tr).children().eq(0).html();
+            $.ajax({
+                type: "post",
+                url: 'userDelete',
+                data: { "username": username },
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function (data) {
+                    if (data.flag === true) {
+                        $(this).parent().parent().remove();
+                    }
+                    else {
+                        alert("删除失败，用户不存在！");
+                    }
+                }
+            })
+        });
+
+        /*查询信息*/
+        $(".search_button").click(function () {
+            var search_user = $('.search_user').val();
+            if (search_user === '') {
+                alert('请输入要查询的用户名！');
+                return;
+            }
+            var username = $("input[name='search_user']").val();
+            $.ajax({
+                type: "post",
+                url: 'userSearch',
+                data: { "username": username },
+                dataType: "JSON",
+                contentType: "application/x-www-form-urlencoded",
+                success: function (return_data) {
+                    if (return_data.flag === true) {
+                        var info = "用户名：" + return_data.data.username + "\n性别：" + return_data.data.gender + "\n密码：" + return_data.data.password + "\n邮箱：" + return_data.data.email;
+                        alert(info);
+                    }
+                    else {
+                        alert("用户信息不存在！");
+                    }
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

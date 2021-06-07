@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content='width=device-width,initial-scale=1.0'>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>获取表格中的数据</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+        }
+
+        table tr {
+            height: 45px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #80808038;
+        }
+
+        table td {
+            border-top: 1px solid #8080804d;
+        }
+
+        table td button {
+            border: 1px solid #2196f3;
+            border-radius: 5px;
+            width: 26%;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 1%;
+            background-color: #2196f3;
+            color: white;
+        }
+
+        table td button:last-child {
+            background-color: #e01e10;
+            border: 1px solid #e01e10;
+        }
+    </style>
+    </head>
+    <body>
+        <table id="table_list">
+            <tr>
+                <th>序号</th>
+                <th>演出厅编号</th>
+                <th>电影编号</th>
+                <th>演出计划票价</th>
+                <th>操作</th>
+            </tr>
+            <tr class="user">
+                <td>1</td>
+                <td>2dfddfs</td>
+                <td>3fdsfsfd</td>
+                <td>0fsdfdsf</td>
+                <td>
+                    <button class="change">修改</button>
+                    <button class="delete">删除</button>
+                </td>
+            </tr>
+            <tr class="user">
+                <td>8fdsfsdf</td>
+                <td>ffdfsdfds2</td>
+                <td>3fdsfdsf</td>
+                <td>0fsfsdf</td>
+                <td>
+                    <button class="change">修改</button>
+                    <button class="delete">删除</button>
+                </td>
+            </tr>
+        </table>
+        <script>
+            // window.onload = function () {
+            //     var a = 'ceshi';
+            //     var b = 'jjj';
+                //     var c = 'dsd';
+                //     var d = 'ds';
+                //     var tr = '<td>' + a + '</td>' + '<td>' +b + '</td>' + '<td>' + c + '</td>' + '<td>' + d + '</td>' + "<td><button class='change'>修改</button><button class='delete'>删除</button></td>";
+                //     $('#table_list').append('<tr class="user">' + tr + '</tr>');
+                // };
+                    console.log("hh");
+                    var row = 2;
+                    var row_true = row - 1;
+                    var column = 3;
+                    var column_true = column - 1;
+                    // var value = $('#table_list tr:eq(0) td:eq(1)').text();
+                    var value = $('table tr:eq('+row+') td:eq('+column+')').text();
+                    console.log(value);
+                   
+                
+            
+            // $('document').ready(function() {
+            //     var a = 'ceshi';
+            //     var b = 'jjj';
+            //     var c = 'dsd';
+            //     var d = 'ds';
+            //     var tr = '<td>' + a + '</td>' + '<td>' +b + '</td>' + '<td>' + c + '</td>' + '<td>' + d + '</td>' + "<td><button class='change'>修改</button><button class='delete'>删除</button></td>";
+            //     $('#table_list').append('<tr class="user">' + tr + '</tr>');
+            // });
+
+            // $('body').on('click','.change',function() {
+            //     alert('测试成功！');
+            // })
+           
+            /*修改数据*/
+            // $('.change').click(function() {
+            //     var tr = $(this).parent().parent();
+            //     // var row = tr.prevAll().length;
+            //     // console.log($(tr).children().eq(0).html());
+            //     var username = $(tr).children().eq(0).html();
+            //     var password = $(tr).children().eq(2).html();
+            //     var email = $(tr).children().eq(3).html();
+            //     var gender =$(tr).children().eq(1).html();
+
+            //     console.log(username);
+            //     console.log(password);
+            //     console.log(email);
+            //     console.log(gender);
+
+
+
+                // var value = $(tr).find('id').eq(0).val();
+
+                // var value = $("table tr:eq(row) td:nth-child(1)").val();
+                
+                // console.log(tr.find('id').eq(0).text());
+            // })
+
+            /*删除数据*/
+            // $('.delete').click(function() {
+            //     $(this).parent().parent().remove();
+            // })
+
+        //     $('.change').click(function () {
+        //         var tr = $(this).parent().parent();
+        //         var username = $(tr).children().eq(0).html();
+        //         var password = $(tr).children().eq(2).html();
+        //         var email = $(tr).children().eq(3).html();
+        //         var gender =$(tr).children().eq(1).html();
+        //         $.ajax({
+        //             type: "post",
+        //             url: 'userUpdate',
+        //             data: { "username": username, "password": password, "gender": gender, "email": email },
+        //             dataType: "JSON",
+        //             success: function (data) {
+        //                 if (data.flag === true) {
+        //                     alert("请求数据成功了，可以修改数据了！");
+        //                     // window.location.href='';
+        //                 }
+        //                 else {
+        //                     alert("修改失败，用户不存在！");
+        //                 }
+        //             }
+        //         })
+        //     });
+
+        // // /*删除数据*/
+        //     $('.delete').click(function () {
+        //         var tr = $(this).parent().parent();
+        //         var username = $(tr).children().eq(0).html();
+        //         $.ajax({
+        //             type: "post",
+        //             url: 'userDelete',
+        //             data: { "username": username },
+        //             dataType: "JSON",
+        //             success: function (data) {
+        //                 if (data.flag === true) {
+        //                     $(this).parent().parent().remove();
+        //                 }
+        //                 else {
+        //                     alert("删除失败，用户不存在！");
+        //                 }
+        //             }
+        //         })
+        //     });
+
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,612 @@
+--------------
+1.1 用户登录  |
+--------------
+请求路径：/login
+请求参数：
+
+参数名
+username	用户名
+password	密码
+
+响应数据
+--json
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "用户名或密码错误"
+}
+
+或
+
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+
+
+-------------
+1.2 用户注册 |
+-------------
+请求路径：/register
+请求参数：
+
+参数名
+username	用户名
+password	密码
+gender		性别
+email		电子邮箱
+
+响应数据
+--json
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "注册失败！"
+}
+或
+
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+
+
+-------------
+1.3 用户管理 |
+-------------
+
+-------------------------
+1.3.1 根据用户名删除用户 |
+-------------------------
+请求路径：/userDelete
+请求参数
+
+参数名
+username	用户名
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "用户不存在，删除失败"
+}
+
+-------------------------
+1.3.2 根据用户名查找用户 |
+-------------------------
+请求路径：/userSearch
+请求参数：
+
+参数名
+username	用户名
+
+响应数据
+--json
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "用户信息不存在"
+}
+或
+{
+    "flag": true,
+    "data": {
+        "username": "asda",
+        "password": "asddd",
+        "gender": "1",
+        "email": "123"
+    },
+    "errorMsg": null
+}
+
+-------------------
+1.3.3 更新用户信息 |
+-------------------
+请求路径：/userUpdate
+请求参数：
+
+username	用户名
+password	密码
+gender		性别
+email		电子邮箱
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "修改失败，用户不存在"
+}
+
+
+-----------------
+1.7 管理演出计划 |
+-----------------
+
+--------------------
+1.7.1 添加演出计划  |
+--------------------
+请求路径：/addSchedule
+请求参数:
+
+参数名
+studio_id		演出厅id
+play_id			电影id
+sched_ticket_price	演出计划票价
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "添加失败，演出计划已经存在"
+}
+
+-------------------
+1.7.2 删除演出计划 |
+-------------------
+请求路径：/deleteSchedule
+请求参数
+
+参数名
+schedule_id	演出计划id
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-------------------
+1.7.3 修改演出计划 |
+-------------------
+请求路径：/updateSchedule
+请求参数
+
+参数名
+studio_id		演出厅id
+play_id			电影id
+sched_ticket_price	演出计划票价
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+--------------------
+1.7.4 查询演出计划  |
+--------------------
+请求路径：/searchSchedule
+请求参数：无
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": [
+        {
+            "sched_id": 2,
+            "studio_id": 2,
+            "play_id": 3,
+            "sched_ticket_price": 0
+        },
+        {
+            "sched_id": 8,
+            "studio_id": 2,
+            "play_id": 3,
+            "sched_ticket_price": 0
+        },
+        {
+            "sched_id": 10,
+            "studio_id": 2,
+            "play_id": 3,
+            "sched_ticket_price": 0
+        },
+        {
+            "sched_id": 11,
+            "studio_id": 2,
+            "play_id": 3,
+            "sched_ticket_price": 0
+        }
+    ],
+    "errorMsg": null
+}
+
+
+---------------
+1.4 演出厅管理 |
+---------------
+
+-----------------
+1.4.1 添加演出厅 |
+-----------------
+请求路径：/addStudio
+请求参数：
+
+参数名
+studio_name		演出厅名称
+studio_row_count	演出厅行数
+studio_col_count	演出厅列数
+studio_introduction	演出厅介绍
+studio_flag		演出厅是否生成座位（默认均不生成）
+			0：尚未生成座位，可以根据行列信息生成座位
+                        1：已经根据影厅的座位信息安排了座位，不能再安排座位；
+                        -1：影厅损坏或者废弃，不能使用',
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-----------------
+1.4.2 删除演出厅 |
+-----------------
+请求路径：/deleteStudio
+请求参数：
+studio_id	演出厅id
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+------------------
+1.4.3 修改演出厅  |
+------------------
+请求路径：/studioUpdate
+请求参数
+
+参数名
+studio_name		演出厅名称
+studio_row_count	演出厅行数
+studio_col_count	演出厅列数
+studio_introduction	演出厅介绍
+studio_flag		演出厅是否已经生成座位
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-----------------
+1.4.4 查询演出厅 |
+-----------------
+请求路径：/searchStudio
+请求参数:无
+
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": {
+        "studio_id": 1,
+        "studio_name": "21",
+        "studio_row_count": 0,
+        "studio_col_count": 0,
+        "studio_introduction": null,
+        "studio_flag": 0
+    },
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "暂无演出厅信息"
+}
+
+查询所有用户信息
+请求路径：/userSearchAll
+请求参数：无
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": [
+        {
+            "username": "=asd",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "=xx",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "asda",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "asdasdasd",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "asdasdasdasd",
+            "password": "asdasdasd",
+            "gender": "阿萨德",
+            "email": "asd@qq.com"
+        },
+        {
+            "username": "fjhfhghgf",
+            "password": "asdasdasd",
+            "gender": "阿萨德",
+            "email": "ada@qq.cv"
+        },
+        {
+            "username": "ghfhgfhgfh",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "jkhkjhkj",
+            "password": "kbkjbkjjj",
+            "gender": "男",
+            "email": "123@qq.com"
+        },
+        {
+            "username": "lkjllkjkj",
+            "password": "gjhgjhgjhg",
+            "gender": "男",
+            "email": "cfcg@qq.com"
+        },
+        {
+            "username": "qqweqweqweq",
+            "password": null,
+            "gender": "2",
+            "email": null
+        },
+        {
+            "username": "qweeee",
+            "password": "asdasd",
+            "gender": "0",
+            "email": "asd"
+        },
+        {
+            "username": "rrrrrrrr",
+            "password": "asdasdaasd",
+            "gender": "ad",
+            "email": "asdas@qq.cv"
+        },
+        {
+            "username": "周翔",
+            "password": null,
+            "gender": "2",
+            "email": null
+        }
+    ],
+    "errorMsg": null
+}
+
+
+-------------
+1.6 剧目管理 |
+-------------
+---------------
+1.6.1 添加电影 |
+---------------
+请求路径：/addPlay
+请求参数
+
+参数名
+play_name		电影名称
+play_introduction	电影介绍
+play_length		电影长度
+play_ticket_price	电影票价
+play_status
+            0：待安排演出
+            1：已安排演出
+            -1：下线',
+
+响应数据
+--json
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "添加失败，电影已经存在"
+}
+或
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+---------------
+1.6.2 删除电影 |
+---------------
+请求路径：/deletePlay
+请求参数
+
+参数名
+play_id		电影id
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-------------------
+1.6.3 修改电影信息 |
+-------------------
+请求路径：/updatePlay
+请求参数
+
+参数名
+play_name		电影名称
+play_introduction	电影介绍
+play_length		电影长度
+play_ticket_price	电影票价
+play_status
+            0：待安排演出
+            1：已安排演出
+            -1：下线',
+
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-------------------
+1.6.4 查询电影信息 |
+-------------------
+请求路径：/searchPlay
+请求参数:无
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": [
+        {
+            "play_id": 1,
+            "play_name": "1",
+            "play_introduction": null,
+            "play_length": 0,
+            "play_ticket_price": 0,
+            "play_status": 0
+        },
+        {
+            "play_id": 3,
+            "play_name": "1",
+            "play_introduction": null,
+            "play_length": 0,
+            "play_ticket_price": 0,
+            "play_status": 0
+        }
+    ],
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "暂无电影信息"
+}
+
+
+----------------
+1.8演出票的管理 |
+----------------
+
+-----------------
+1.8.1 添加演出票 |
+-----------------
+请求路径：/addTicket
+请求参数：
+
+参数名
+seat_id		座位id
+sched_id	演出计划id
+ticket_price	票价
+ticket_status	票的状态（0：待销售，1：锁定，2：卖出）
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-----------------
+1.8.2 更新演出票 |
+-----------------
+请求路径：/updateTicket
+请求参数：
+
+参数名
+seat_id		座位id
+sched_id	演出计划id
+ticket_price	票价
+ticket_status	票的状态（0：待销售，1：锁定，2：卖出）
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+-----------------
+1.8.3 查询演出票 |
+-----------------
+请求路径：/searchTicket
+请求参数：无
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": [
+        {
+            "ticket_id": 2,
+            "seat_id": 7,
+            "sched_id": 2,
+            "ticket_price": 0,
+            "ticket_status": 0
+        },
+        {
+            "ticket_id": 8,
+            "seat_id": 7,
+            "sched_id": 10,
+            "ticket_price": 0,
+            "ticket_status": 0
+        }
+    ],
+    "errorMsg": null
+}

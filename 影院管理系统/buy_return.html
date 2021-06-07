@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-width: 1200px;
+            width: 100%;
+            background-color: #f5f5f580;
+            z-index: -10;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .list {
+            width: 230px;
+            min-width: 230px;
+            background-color: black;
+            color: gray;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .list ul {
+            text-decoration: none;
+        }
+
+        .list ul a {
+            color: #9E9E9E;
+        }
+
+        .list ul li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        .list ul a:first-child li {
+            margin-top: 200px;
+        }
+
+        .list ul li:hover {
+            color: white;
+            background-color: #8080807d;
+        }
+
+        .buy_back {
+            background-color: #8080807d;
+            color: white;
+        }
+
+        .content {
+            position: relative;
+            width: 85%;
+            left: 230px;
+        }
+
+        .content .topic {
+            width: 95%;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            padding-right: 5%;
+            background-color: #8080801a;
+        }
+
+        .content .buy_back_ticket {
+            width: 95%;
+            height: 600px;
+        }
+
+        .content .buy_back_ticket .buy,
+        .back {
+            width: 30%;
+            margin-left: 15%;
+            display: inline-block;
+            margin-top: 150px;
+            height: 400px;
+            position: relative;
+            background-color: transparent;
+        }
+
+        .content .buy_back_ticket .buy:before,
+        .back:before {
+            background: url('https://hbimg.huabanimg.com/2ec4fc92a10fbd45c7dd1d7455643b8050b83c7d3ebe-O6Mcw9_fw658/format/webp') no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 400px;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.6;
+            border-radius: 15px;
+            box-shadow: 10px 10px 10px black;
+        }
+
+        .content .buy_back_ticket .buy .buy_ticket,
+        .back .back_ticket {
+            width: 40%;
+            margin-left: 30%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin-top: 150px;
+            font-size: 24px;
+            border-radius: 10px;
+            font-weight: bold;
+            background-color: #ffffff;
+            border: 1px solid #ffffff;
+        }
+
+        .buy_tic {
+            display: none;
+            min-width: 408px;
+            width: 40%;
+            height: 430px;
+            position: fixed;
+            top: 150px;
+            left: 31%;
+            background-color: white;
+            z-index: 2;
+            border: 1px solid black;
+            box-shadow: 7px 7px 10px black;
+            border-radius: 15px;
+        }
+
+        .buy_tic h2 {
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+        }
+
+        .buy_tic div {
+            width: 80%;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 18%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .buy_tic div:nth-child(2) {
+            margin-top: 120px;
+        }
+
+        .buy_tic div input {
+            width: 40%;
+            height: 30px;
+            border-radius: 7px;
+            border: 1px solid black;
+            position: absolute;
+            right: 20%;
+        }
+
+        .buy_tic button {
+            border: 1px solid #ff00008c;
+            background-color: #ff00008c;
+            border-radius: 5px;
+            width: 20%;
+            margin: 25px 40%;
+            height: 35px;
+            line-height: 35px;
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .buy_tic button {
+            margin-top: 40px;
+            border: 1px solid #008000b5;
+            background-color: #008000b5;
+        }
+
+        .choose {
+            display: none;
+            min-width: 408px;
+            width: 30%;
+            height: 200px;
+            position: fixed;
+            top: 250px;
+            left: 38%;
+            background-color: white;
+            z-index: 2;
+            border: 1px solid black;
+            box-shadow: 7px 7px 10px black;
+            border-radius: 15px;
+        }
+
+        .choose h2 {
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+        }
+
+        .choose input {
+            position: absolute;
+            top: 110px;
+            width: 50%;
+            height: 30px;
+            border-radius: 7px;
+            border: 1px solid black;
+            position: absolute;
+            right: 38%;
+        }
+
+        .choose button {
+            border: 1px solid #008000b5;
+            background-color: #008000b5;
+            border-radius: 5px;
+            width: 20%;
+            margin: 0 40%;
+            height: 35px;
+            line-height: 35px;
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+            position: absolute;
+            top: 108px;
+            left: 28%;
+        }
+
+        .values {
+            display: none;
+            position: fixed;
+            top: 140px;
+            width: 70%;
+            left: 10%;
+            height: 360px;
+            padding: 50px 5%;
+            background-color: white;
+            box-shadow: 7px 7px 10px black;
+        }
+
+        .values h2 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        .values table {
+            width: 100%;
+        }
+
+        .values table tr {
+            height: 20px;
+            text-align: center;
+        }
+
+        .values table td {
+            border: 1px solid gray;
+            border-radius: 3px;
+            width: 2%;
+            height: 25px;
+            background-color: white;
+            border-bottom: 2px solid red;
+        }
+
+        .values div {
+            border: 1px solid gray;
+            border-radius: 3px;
+            width: 10%;
+            height: 40px;
+            margin-left: 27%;
+            margin-top: 30px;
+            display: inline-block;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .values .seat_define {
+            width: 10%;
+            position: absolute;
+            bottom: 20px;
+            left: 18%;
+            border: 1px solid #008000b5;
+            background-color: #008000b5;
+            color: white;
+            font-size: 19px;
+        }
+
+        .search_all {
+            position: absolute;
+            top: 80px;
+            right: 2%;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .search_all button {
+            border: 1px solid #0080008f;
+            background-color: #0080008f;
+            color: white;
+            font-size: 14px;
+            border-radius: 7px;
+            width: 90%;
+            margin: 0 auto;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 5%;
+            font-weight: bold;
+        }
+
+        .ticket_value {
+            display: none;
+            min-width: 408px;
+            width: 40%;
+            height: 430px;
+            position: fixed;
+            top: 150px;
+            left: 31%;
+            background-color: white;
+            z-index: 2;
+            border: 1px solid black;
+            box-shadow: 7px 7px 10px black;
+            border-radius: 15px;
+            overflow-y: scroll;
+        }
+
+        .ticket_value .call_back {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #4CAF50;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            border-radius: 7px;
+            font-weight: bold;
+            box-shadow: 0px 0px 0px white;
+
+        }
+
+        .ticket_value div {
+            width: 75%;
+            height: 170px;
+            margin: 0 auto;
+            border: 1px solid black;
+            box-shadow: 6px 6px 7px black;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .ticket_value div div {
+            height: 30px;
+            width: 38%;
+            line-height: 30px;
+            margin-left: 10%;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0px 0px 0px black;
+            border: 0px;
+            margin-top: 10px;
+        }
+
+        .back_ticket_value {
+            display: none;
+            min-width: 408px;
+            width: 40%;
+            height: 430px;
+            position: fixed;
+            top: 150px;
+            left: 31%;
+            background-color: white;
+            z-index: 2;
+            border: 1px solid black;
+            box-shadow: 7px 7px 10px black;
+            border-radius: 15px;
+            overflow-y: scroll;
+        }
+
+        .back_ticket_value div {
+            width: 85%;
+            height: 230px;
+            margin: 0 auto;
+            border: 1px solid black;
+            box-shadow: 6px 6px 7px black;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .back_ticket_value div div {
+            height: 30px;
+            width: 38%;
+            line-height: 30px;
+            margin-left: 10%;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0px 0px 0px black;
+            border: 0px;
+            margin-top: 10px;
+        }
+
+        .back_ticket_value div div:last-child {
+            display: block;
+            width: 25%;
+            margin: 20px auto;
+        }
+
+        .back_ticket_value div div:last-child button {
+            display: block;
+            width: 90%;
+            border: 1px solid #ff00008c;
+            background-color: #ff00008c;
+            color: white;
+            font-size: 18px;
+            border-radius: 7px;
+            margin: 0 auto;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 5%;
+            font-weight: bold;
+        }
+
+
+        .appear {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list">
+        <img src="">
+        <ul>
+            <a href='./performance_hall.html'>
+                <li class="performance_hall">影厅管理</li>
+            </a>
+            <a href='./'>
+                <li>计划管理</li>
+            </a>
+            <a href='./'>
+                <li>座位管理</li>
+            </a>
+            <a href='./'>
+                <li>剧目管理</li>
+            </a>
+            <a href='./'>
+                <li>影票管理</li>
+            </a>
+            <a href='./'>
+                <li>用户管理</li>
+            </a>
+            <a href='./'>
+                <li>销售数据</li>
+            </a>
+            <a href='./'>
+                <li class="buy_back">购票退票</li>
+            </a>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="topic">
+            <a href='./login.html'>登录</a> /
+            <a href='./register.html'>注册</a>
+        </div>
+        <div class="buy_back_ticket">
+            <div class="buy">
+                <div class="buy_ticket">
+                    购票
+                </div>
+            </div>
+            <div class="back">
+                <div class="back_ticket">
+                    退票
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buy_tic">
+        <h2>票据信息</h2>
+        <div>
+            电影票编号：<input type="text" id="buy_ticket_id" name="buy_ticket_id">
+        </div>
+        <div>
+            销售员用户名：<input type="text" id="buy_username" name="buy_username">
+        </div>
+        <div>
+            实付金额：<input type="text" id="buy_sale_payment" name="buy_sale_payment">
+        </div>
+        <div>
+            找零：<input type="text" id="buy_sale_change" name="buy_sale_change">
+        </div>
+        <button id="buy">购票</button>
+    </div>
+    <div class="choose">
+        <h2>选择演出厅</h2>
+        <input type="text" id='choose_home' name='choose_name'>
+        <button class="choose_define">确认选择</button>
+    </div>
+    <div class="values">
+        <h2>座位分布图</h2>
+        <table id="table_list">
+        </table>
+        <div class="seat_define">确认选择</div>
+    </div>
+    <div class="search_all">
+        <button>查询所有订单信息</button>
+    </div>
+    <div class="ticket_value">
+        <div class="call_back">返回</div>
+    </div>
+    <div class="back_ticket_value">
+        <div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div>电影编号</div>
+            <div><button class="back_ticket_define">退票</button></div>
+        </div>
+    </div>
+
+    <script>
+        //购票
+        $('.buy_ticket').click(function () {
+            $('.list').css('opacity', '0.2');
+            $('.content').css('opacity', '0.2');
+            $('.choose').addClass('appear');
+            var studio_id = $('#choose_home').val();
+            $('.choose_define').click(function () {
+                $('.choose').removeClass('appear');
+                $('.values').addClass('appear');
+                $.ajax({
+                    type: "post",
+                    url: 'searchStudio',
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.flag === true) {
+                            for (var i in data.data) {
+                                if (data.data[i].studio_id === studio_id) {
+                                    var row = data.data[i].studio_row_count;
+                                    var col = data.data[i].studio_col_count;
+                                    $("#table_list tr").empty("");
+                                    for (var j = 0; j < row; j++) {
+                                        var tr = document.createElement('tr');
+                                        $('#table_list').appendChild(tr);
+                                        for (var k = 0; k < col; k++) {
+                                            var td = document.createElement('td');
+                                            td.innerHTML = j + 1 + '-' + k + 1;
+                                            tr.appendChild(td);
+                                        }
+                                    }
+                                }
+                            }
+                            $.ajax({
+                                type: "post",
+                                url: 'searchSeat',
+                                data: { "studio_id": studio_id },
+                                dataType: "JSON",
+                                success: function (data) {
+                                    for (var i in data.data) {
+                                        var row = data.data[i].seat_row - 1;
+                                        var column = data.data[i].seat_column - 1;
+                                        if (data.data[i].seat_status === 1) {
+                                            var seat = $('table tr:eq(' + row + ') td:eq(' + column + ')');
+                                            seat.css('visibility', 'visible');
+                                        } else {
+                                            var seat = $('table tr:eq(' + row + ') td:eq(' + column + ')');
+                                            seat.css('visibility', 'hidden');
+                                        }
+                                    }
+                                }
+                            })
+                            for (var i = 0; i < row; i++) {
+                                var cells = rows[i].cells;
+                                for (var j = 0; j < col; j++) {
+                                    var col_cell = cells[j];
+                                    $('body').on('click', 'col_cell', function () {
+                                        if (this.style.background = 'white') {
+                                            var value = this.innerHTML();
+                                            this.style.background = 'green';
+                                            $('.seat_define').click(function () {
+                                                $.ajax({
+                                                    type: "post",
+                                                    url: 'updateSeat',
+                                                    data: { "studio_id": studio_id, "seat_row": i, "seat_column": j, "seat_status": 1 },
+                                                    dataType: "JSON",
+                                                    success: function (data) {
+                                                        if (data.flag === true) {
+                                                            alert("选定座位成功！");
+                                                            $('.values').removeClass('appear');
+                                                            $('.buy_tic').addClass('appear');
+                                                            $('.seat_define').click(function () {
+                                                                $('.values').removeClass('appear');
+                                                                $('.buy_tic').addClass('appear');
+                                                                $('#buy').click(function () {
+                                                                    var ticket_id = $('#buy_ticket_id').val();
+                                                                    var username = $('#buy_username').val();
+                                                                    var sale_payment = $('#buy_sale_payment').val();
+                                                                    var sale_change = $('#buy_sale_change').val();
+                                                                    if (ticket_id === '') {
+                                                                        alert('请输入电影票编号！');
+                                                                        return;
+                                                                    }
+                                                                    if (username === '') {
+                                                                        alert('请输入售票员用户名！');
+                                                                        return;
+                                                                    }
+                                                                    if (sale_payment === '') {
+                                                                        alert('请输入实付金额！');
+                                                                        return;
+                                                                    }
+                                                                    if (sale_change === '') {
+                                                                        alert('请输入找零！');
+                                                                        return;
+                                                                    }
+                                                                    if (isNaN(ticket_id) === true) {
+                                                                        alert('电影票编号输入不合规范（应为数字），请重新输入！');
+                                                                        return;
+                                                                    }
+                                                                    if (isNaN(sale_payment) === true) {
+                                                                        alert('实付金额输入不合规范（应为数字），请重新输入！');
+                                                                        return;
+                                                                    }
+                                                                    if (isNaN(sale_change) === true) {
+                                                                        alert('找零输入不合规范（应为数字），请重新输入！');
+                                                                        return;
+                                                                    }
+                                                                    $.ajax({
+                                                                        type: "post",
+                                                                        url: 'buyTicket',
+                                                                        data: { "ticket_id": ticket_id, "username": username, "sale_payment": sale_payment, "sale_change": sale_change, "sale_type": 1, "sale_status": 0 },
+                                                                        dataType: "JSON",
+                                                                        success: function (data) {
+                                                                            if (data.flag === true) {
+                                                                                alert("买票成功！");
+                                                                                var sale_type = (data.data.sale_type === 1) ? '销售单' : '退款单';
+                                                                                var sale_status = (data.data.sale_status === 1) ? '已付款' : '待付款';
+                                                                                $('.ticket_value').append('<div><div>销售单编号：' + data.data.sale_ID + ' </div><div>电影票编号：' + data.data.ticket_id + ' </div><div>售票员用户名：' + data.data.username + ' </div><div>实付金额：' + data.data.sale_payment + ' </div><div>找零：' + data.data.sale_change + ' </div><div>销售类型：' + sale_type + '</div><div>销售状态：' + sale_status + '</div></div>');
+                                                                                $('.back_ticket_value').append('<div><div>销售单编号：' + data.data.sale_ID + ' </div><div>电影票编号：' + data.data.ticket_id + ' </div><div>售票员用户名：' + data.data.username + ' </div><div>实付金额：' + data.data.sale_payment + ' </div><div>找零：' + data.data.sale_change + ' </div><div>销售类型：' + sale_type + '</div><div>销售状态：' + sale_status + '</div>' + '<div><button class="back_ticket_define">退票</button></div></div>');
+                                                                                $('.list').css('opacity', '1');
+                                                                                $('.content').css('opacity', '1');
+                                                                                $('.buy_tic').removeClass('appear');
+                                                                            }
+                                                                            else {
+                                                                                alert("买票失败！");
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                })
+                                                            })
+                                                        }
+                                                        else {
+                                                            alert("选定座位失败！");
+                                                        }
+                                                    }
+                                                })
+                                            })
+                                        } else {
+                                            alert('该座位已经被选择，请选择其它的座位~');
+                                        }
+                                    })
+                                }
+                            }
+                        } else {
+                            alert("查询座位失败！");
+                        }
+                    }
+                })
+
+            })
+        })
+
+        //查询
+        $('.search_all').click(function () {
+            $('.list').css('opacity', '0.2');
+            $('.content').css('opacity', '0.2');
+            $('.ticket_value').addClass('appear');
+            $('.call_back').click(function () {
+                $('.list').css('opacity', '1');
+                $('.content').css('opacity', '1');
+                $('.ticket_value').removeClass('appear');
+            })
+        })
+
+        //退票
+        $('.back_ticket').click(function () {
+            $('.list').css('opacity', '0.2');
+            $('.content').css('opacity', '0.2');
+            $('.back_ticket_value').addClass('appear');
+            $('.back_ticket_define').click(function () {
+                //获取信息
+
+                $.ajax({
+                    type: "post",
+                    url: 'returnTicket',
+                    data: { "sale_ID": sale_ID, "ticket_id": ticket_id, "username": username, "sale_payment": sale_payment, "sale_change": sale_change, "sale_type": -1, "sale_status": 1 },
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.flag === true) {
+                            alert("退票成功！");
+                            //删除两个div里面相应的数据
+
+                            $('.list').css('opacity', '1');
+                            $('.content').css('opacity', '1');
+                            $('.back_ticket_value').removeClass('appear');
+                        }
+                        else {
+                            alert("退票失败！");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

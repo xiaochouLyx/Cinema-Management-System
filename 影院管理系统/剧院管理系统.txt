@@ -1,0 +1,192 @@
+-------------
+1.5 座位管理 |
+-------------
+---------------
+1.5.1 添加座位 |
+---------------
+请求路径：/updateSeat
+请求参数
+
+参数名
+studio_id	演出厅id
+seat_row	座位所在行数
+seat_column	座位所在列数
+seat_status	座位状态（默认为空位）
+		0：此处是空位，没有安排座椅
+		1：完好的座位，可以使用
+                -1：座位损坏，不能安排座位',
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+或
+{
+    "flag": false,
+    "data": null,
+    "errorMsg": "座位存在，添加失败"
+}
+
+--------------------------------
+1.5.2 根据座位行数和列数删除座位 |
+--------------------------------
+请求路径：/deleteSeat
+请求参数
+
+参数名
+seat_row	座位所在行数
+seat_column	座位所在列数
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+---------------
+1.5.3 修改座位 |
+---------------
+请求路径：/updateSea
+请求参数
+
+参数名
+studio_id	演出厅id
+seat_row	座位所在行数
+seat_column	座位所在列数
+seat_status	座位状态（默认为空位）
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+
+----------------
+1.5.4 查询座位  |
+----------------
+请求路径：/searchSeat
+请求参数
+
+参数名
+studio_id	演出厅id
+
+响应数据
+--json
+{
+    "flag": fasle,
+    "data": null,
+    "errorMsg": "演出厅暂无添加座位"
+}
+或
+{
+    "flag": true,
+    "data": [
+        {
+            "seat_id": 7,
+            "studio_id": 1,
+            "seat_row": 1,
+            "seat_column": 3,
+            "seat_status": 0
+        },
+        {
+            "seat_id": 11,
+            "studio_id": 1,
+            "seat_row": 1,
+            "seat_column": 4,
+            "seat_status": 0
+        },
+        {
+            "seat_id": 12,
+            "studio_id": 1,
+            "seat_row": 1,
+            "seat_column": 5,
+            "seat_status": 0
+        },
+        {
+            "seat_id": 13,
+            "studio_id": 1,
+            "seat_row": 1,
+            "seat_column": 1,
+            "seat_status": 0
+        }
+    ],
+    "errorMsg": null
+}
+
+---------------------------
+1.9 根据剧目id分析销售数据 |
+---------------------------
+请求路径：/saleAnalyse
+请求参数
+
+参数名
+ticket_id	演出票的id
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": 0,
+    "errorMsg": null
+}
+
+----------
+2.0 购票  |
+----------
+请求路径：/buyTicket
+请求参数
+
+参数名
+ticket_id	电影票id
+username	售票员用户名
+sale_payment	实付金额
+sale_change	找零
+sale_type	1：销售单,-1：退款单,
+sale_status	0：代付款,1：已付款
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": {
+        "sale_ID": 0,
+        "ticket_id": 2,
+        "username": "asda",
+        "sale_payment": 0,
+        "sale_change": 0,
+        "sale_type": 0,
+        "sale_status": 0
+    },
+    "errorMsg": null
+}
+
+----------
+2.1 退票  |
+----------
+请求路径：/returnTicket
+请求参数
+
+参数名
+sale_ID		销售单id
+ticket_id	电影票id
+username	售票员用户名
+sale_payment	实付金额
+sale_change	找零
+sale_type	1：销售单,-1：退款单,
+sale_status	0：代付款,1：已付款
+
+响应数据
+--json
+{
+    "flag": true,
+    "data": null,
+    "errorMsg": null
+}
+

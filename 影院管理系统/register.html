@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>登陆界面</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta charset="utf-8">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+			font-weight: bold;
+			font-family: '楷体', Arial, Helvetica, sans-serif;
+		}
+
+		body {
+			background-image: url(https://hbimg.huabanimg.com/c13aefc6a93b5b7233c60fa12d9f542e0f27b9a9128f2-UI44Gq_fw658/format/webp);
+			color: white;
+			background-size: cover;
+			min-width: 600px;
+		}
+
+		.register {
+			margin: 200px auto 0;
+			border: 1px rgb(168, 167, 168) solid;
+			width: 470px;
+			height: 360px;
+			border-radius: 10px;
+			box-shadow: 7px 7px 10px black;
+			background-color: transparent;
+		}
+
+		h1 {
+			width: 100%;
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.content {
+			width: 80%;
+			margin: 0 auto;
+			font-size: 25px;
+		}
+
+		.password,
+		.email,
+		.gender {
+			right: -50px;
+			position: relative;
+		}
+
+		.content div {
+			margin-top: 20px;
+		}
+
+		input {
+			height: 30px;
+			width: 200px;
+			border-radius: 5px;
+			border: 1px solid white;
+		}
+
+		.gender_change {
+			position: relative;
+			top: -10px;
+		}
+
+		.gender input {
+			width: 20px;
+			height: 20px;
+		}
+
+		.gender input:last-child {
+			margin-left: 20px;
+		}
+
+		.gender {
+			position: relative;
+			display: inline-block;
+		}
+
+		button {
+			font-size: 20px;
+			border-radius: 15px;
+			border: 1px solid white;
+			margin-left: 80px;
+			width: 200px;
+			height: 35px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="register">
+		<h1>注册界面</h1>
+		<div class="content">
+			<div>
+				新用户名：
+				<input type="text" name="username" placeholder="用户名" class="username">
+			</div>
+			<div>
+				密码：
+				<input type="password" name="password" class="password" placeholder="密码">
+			</div>
+			<div>
+				邮箱：
+				<input type="email" name="email" placeholder="邮箱" class="email">
+			</div>
+			<div class="gender_change">
+				性别：
+				<div class="gender">
+					<input type="radio" name="gender" value="0">男
+					<input type="radio" name="gender" value="1">女
+				</div>
+			</div>
+			<div>
+				<button type="submit" class="submit">注册</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(".submit").click(function () {
+			var username = $(".username").val();
+			if (username === '') {
+				alert('请输入用户名');
+				return;
+			}
+			var password = $(".password").val();
+			if (password === '') {
+				alert('请输入密码');
+				return;
+			}
+			var email = $(".email").val();
+			if (email === '') {
+				alert('请输入邮箱');
+				return;
+			}
+			var gender = $("input[name='gender']:checked").val();
+			if (gender == null) {
+				alert('请选择性别');
+				return;
+			}
+			$.ajax({
+				type: "post",
+				url: 'register',
+				data: { "username": username, "password": password, "gender": gender, "email": email },
+				dataType: "JSON",
+				// contentType: "application/json;charset=utf-8",
+				success: function (data) {
+					if (data.flag === true) {
+						alert("注册成功！");
+					}
+					else {
+						alert("注册失败！");
+					}
+				}
+			})
+		})
+	</script>
+</body>
+
+</html>

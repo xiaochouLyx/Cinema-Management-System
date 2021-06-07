@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>用户查询</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta charset="utf-8">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+            font-family: '楷体', Arial, Helvetica, sans-serif;
+		}
+
+		body {
+			background-image: url(https://hbimg.huabanimg.com/c13aefc6a93b5b7233c60fa12d9f542e0f27b9a9128f2-UI44Gq_fw658/format/webp);
+			color: white;
+			background-size: cover;
+			min-width: 600px;
+            font-weight: bold;
+		}
+
+        .search{
+            width: 40%;
+            margin-left: 25%;
+            height: 50px;
+            border-radius: 15px;
+            border: 2px solid white;
+            margin-top: 100px;
+        }
+        button {
+            width: 8%;
+            margin-left: 2%;
+            height: 52px;
+            border-radius: 15px;
+            border: 2px solid green;
+            background-color: green;
+            color: white;
+            font-size: 23px;
+            margin-top: 100px;
+        }
+        .content {
+            width: 37%;
+            margin: 0 auto;
+            margin-top: 60px;
+            height: 250px;
+            border-radius: 20px;
+            border: 2px solid black;
+			box-shadow: 7px 7px 10px black;
+            font-size: 26px;
+            padding-left: 13%;
+        }
+
+		.password,
+		.email,
+		.gender {
+			right: -50px;
+			position: relative;
+		}
+        
+        .username {
+            right: -25px;
+			position: relative;
+        }
+
+		.content div {
+			margin-top: 20px;
+		}
+
+		input {
+			height: 30px;
+			width: 200px;
+			border-radius: 5px;
+			border: 1px solid white;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <input placeholder="请输入你要查询的用户的姓名" class="search">
+    <button>查询</button>
+    <div class="content">
+        <div>
+            用户名：
+            <input type="text" name="username" placeholder="用户名" class="username">
+        </div>
+        <div class="gender_change">
+            性别：
+            <input type="text" name="gender" placeholder="性别" class="gender">
+        </div>
+        <div>
+            密码：
+            <input type="password" name="password" class="password" placeholder="密码">
+        </div>
+        <div>
+            邮箱：
+            <input type="email" name="email" placeholder="邮箱" class="email">
+        </div>
+    </div>
+
+
+
+
+
+
+	<script>
+		$(".submit").click(function () {
+			var username = $(".username").val();
+			if (username === '') {
+				alert('请输入用户名');
+				return;
+			}
+			var password = $(".password").val();
+			if (password === '') {
+				alert('请输入密码');
+				return;
+			}
+			var email = $(".email").val();
+			if (email === '') {
+				alert('请输入邮箱');
+				return;
+			}
+			var gender = $("input[name='gender']:checked").val();
+			if (gender == null) {
+				alert('请选择性别');
+				return;
+			}
+			$.ajax({
+				type: "post",
+				url: 'register',
+				data: { "username": username, "password": password, "gender": gender, "email": email },
+				dataType: "JSON",
+				// contentType: "application/json;charset=utf-8",
+				success: function (data) {
+					if (data.flag === true) {
+						alert("注册成功！");
+					}
+					else {
+						alert("注册失败！");
+					}
+				}
+			})
+		})
+	</script>
+</body>
+
+</html>

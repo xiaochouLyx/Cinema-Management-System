@@ -1,0 +1,11 @@
+1、第一个是路径  就不要加/了
+2、第二个是dataType，json加引号
+3、第三个contentType，我注释掉了，这儿加上他的话也报错，contenttype还是慎用吧
+
+
+
+        /*问题：var的位置需要注意！*/
+
+解决jQuery ajax动态新增节点无法触发点击事件的问题（.on .live(好像没有用)）
+
+

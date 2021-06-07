@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>信息管理</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: '楷体', Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-image: url(https://hbimg.huabanimg.com/c13aefc6a93b5b7233c60fa12d9f542e0f27b9a9128f2-UI44Gq_fw658/format/webp);
+            background-size: cover;
+            min-width: 850px;
+        }
+
+        caption {
+            font-size: 45px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 70%;
+            margin: 50px auto;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        tr {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        td {
+            border-top: 1px solid #80808054;
+        }
+
+        tr:nth-child(2n+1) {
+            background-color: #ffffff99;
+        }
+
+        tr:nth-child(2n) {
+            background-color: white;
+        }
+
+        th {
+            background-color: white;
+        }
+
+        input {
+            font-weight: bold;
+        }
+
+        th input {
+            border: 1px solid #23b66c;
+            border-radius: 12px;
+            width: 80px;
+            height: 30px;
+            background-color: #23b66c;
+            color: white;
+            margin-left: 30%;
+        }
+
+        td input {
+            border: 1px solid #23b66c;
+            border-radius: 12px;
+            width: 50px;
+            height: 30px;
+            background-color: #23b66c;
+            color: white;
+        }
+
+        tr td:last-child input {
+            border: 1px solid #f44336c9;
+            background-color: #f44336c9;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption>信息管理</caption>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>用户名</th>
+                <th>性别</th>
+                <th>密码</th>
+                <th>电子邮箱</th>
+                <th colspan="2"><a href='./finduser.html'><input type="button" value="查找用户"></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="user">
+                <td>1</td>
+                <td>小红</td>
+                <td>男</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+            <tr class="user">
+                <td>2</td>
+                <td>小明</td>
+                <td>女</td>
+                <td>12345678</td>
+                <td>2108459568@qq.com</td>
+                <td><input type="button" value="修改" class="change"></td>
+                <td><input type="button" value="删除" class="delete"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var changes = $('.change');
+        var deletes = $('.delete');
+        var users = $('.user');
+        for (var i = 0; i < changes.length; i++) {
+            changes[i].click(function () {
+                var username = users[i].children('td').eq(1).val();
+                var password = users[i].children('td').eq(3).val();
+                var email = users[i].children('td').eq(4).val();
+                var gender = users[i].children('td').eq(2).val();
+                $.ajax({
+                    type: "post",
+                    url: 'userUpdate',
+                    data: { "username": username, "password": password, "gender": gender, "email": email },
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.flag === true) {
+                            alert("请求数据成功了，可以修改数据了！");
+                            // window.location.href='';
+                        }
+                        else {
+                            alert("修改失败，用户不存在！");
+                        }
+                    }
+                })
+            })
+        }
+        for (var i = 0; i < deletes.length; i++) {
+            deletes[i].click(function () {
+                var username = users[i].children('td').eq(1).val();
+                $.ajax({
+                    type: "post",
+                    url: 'userDelete',
+                    data: { "username": username },
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data.flag === true) {
+                            $("tr:gt(0):eq(i+1)").remove();
+                            alert('删除数据成功了！');
+                        }
+                        else {
+                            alert("删除失败，用户不存在！");
+                        }
+                    }
+                })
+            })
+        }
+
+    </script>
+</body>
+
+</html>
